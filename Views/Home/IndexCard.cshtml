@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Employee>
+@{
+    ViewBag.PageTitle = "Employee Details";
+}
+<div class="col-lg-12">
+    <div class="row mx-auto">
+        @{ 
+            foreach (Employee employee1 in Model)
+            {
+                var photos = "~/Image/" + (employee1.PhotoPath ?? "no_photo.jpg");
+                <div class="card mx-auto mt-3 border-5" style="width: 18rem;">
+                    <img class="card-img-top" src="@photos" alt=""
+                         asp-append-version="true" />
+                    <div class="card-body">
+                        <center><h5>@employee1.EmployeeId</h5></center>
+                        <center><h5>@employee1.EmployeeName</h5></center>
+                        <center><h5>@employee1.Email</h5></center>
+                        <center><h5>@employee1.Department</h5></center>
+                        <center><h5>@employee1.Salary</h5></center>
+                    </div>
+                    <div class="card-footer">
+                        <a asp-controller="Home" asp-action="Index" class="btn btn-warning">List</a>
+                        <button class="btn btn-danger" id="confirmationDelete" onclick="confirmationDelete(@employee1.EmployeeId);">Delete</button>
+                        <a asp-controller="Home" asp-action="Update" asp-route-id="@employee1.EmployeeId" class="btn btn-primary">Update</a>
+                        
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>
+
+
+        <script>
+            function confirmationDelete(id) {
+                let text;
+                if (confirm("Are You sure to delete!") == true) {
+                    location.replace("https://localhost:44361/Home/Delete/" + id)
+                }
+                else {
+                    alert("Your Data is Safe")
+                }
+            }
+        </script>
+

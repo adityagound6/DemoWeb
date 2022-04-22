@@ -1,0 +1,47 @@
+﻿@model IEnumerable<IdentityRole>;
+
+@{
+    ViewBag.PageTitle = "Employee Details";
+}
+
+<div class="row justify-content-center m-3">
+    <div class="">
+        <table class="table table-dark ">
+            <thead>
+                <tr>
+                    <th scope="col">Role Id</th>
+                    <th scope="col">Role Name</th>
+                    <th scope="col">View</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    foreach (var role in Model)
+                    {
+                        <tr>
+                            <th scope="row">@role.Id</th>
+                            <td>@role.Name</td>
+                            <td>
+                                <form asp-action="DeleteRole" asp-controller="Admin" asp-route-id="@role.Id" method="post">
+                                    <a class="btn btn-warning" asp-controller="Admin" asp-action="Edit" asp-route-Id="@role.Id">Edit</a>
+                                    <button class="btn btn-danger" onclick="return confirm('Are you sure to delete @role.Name')">Delete</button>
+                                </form>                              
+                            </td>
+                        </tr>
+
+                    }
+                }
+
+            </tbody>
+        </table>
+
+    </div>
+</div>
+<script>
+    function confirmDelete(id) {
+        let text;
+        if (confirm("Are You sure to delete!") == true) {
+            location.replace("https://localhost:44361/Admin/DeleteRole/" + id)
+        }
+    }
+</script>

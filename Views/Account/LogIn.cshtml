@@ -1,0 +1,34 @@
+﻿@model LogInViewModel;
+
+
+@{
+    ViewBag.PageTitle = "Log in";
+}
+
+<div class="row justify-content-center m-3">
+    <div class="col-sm-2">
+        <form asp-action="LogIn" asp-controller="Account" method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Email">Email</label>
+                <input asp-for="Email" class="form-control" placeholder="Email">
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password">Password</label>
+                <input asp-for="Password" class="form-control" placeholder="Password">
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label asp-for="RememberMe">
+                    <input asp-for="RememberMe" />
+                    @Html.DisplayNameFor(m=> m.RememberMe)
+                        </label>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Log In</button>
+            <p>If you don't have Account <a asp-action="Register" asp-controller="Account">sign up</a></p>
+        </form>
+    </div>
+</div>

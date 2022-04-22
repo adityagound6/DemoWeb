@@ -1,0 +1,72 @@
+﻿@model UpdateEmployeeViewModel;
+
+@{
+    ViewBag.PageTitle = "Update";
+    var Ephotos = "~/Image/" + (Model.ExistingPhotoPath ?? "no_photo.jpg");
+}
+<div class="row justify-content-center m-3">
+    <div class="col-sm-2">
+        <form enctype="multipart/form-data" asp-action="Update" asp-controller="Home" method="post">
+            <div class="form-group">
+                <input asp-for="EmoloyeeId" hidden />
+                <input asp-for="ExistingPhotoPath" hidden />
+                <span asp-validation-for="EmployeeName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EmployeeName">Name</label>
+                <input asp-for="EmployeeName" value="@Model.EmployeeName" class="form-control" placeholder="Enter Name">
+                <span asp-validation-for="EmployeeName" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="display:none">
+                <label asp-for="GetEmail">Email</label>
+                <input asp-for="GetEmail" value="@Model.email" class="form-control" placeholder="Email">
+                <span asp-validation-for="GetEmail" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="display:none">
+                <label asp-for="email">Email</label>
+                <input asp-for="email" value="@Model.email" class="form-control" placeholder="Email">
+                <span asp-validation-for="email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UpdateEmail">Email</label>
+                <input asp-for="UpdateEmail" value="@Model.UpdateEmail" class="form-control" placeholder="Email">
+                <span asp-validation-for="UpdateEmail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Salary">Salary</label>
+                <input asp-for="Salary" value="@Model.Salary" class="form-control" placeholder="Salary">
+                <span asp-validation-for="Salary" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Department">Select Department</label>
+                <select class="form-control form-control-lg" asp-for="Department" asp-items="Html.GetEnumSelectList<Dept>()">
+                    <option value="">please select</option>
+                </select>
+                <span class="text-danger" asp-validation-for="Department"></span>
+            </div>
+            <img class="card-img-top" src="@Ephotos" alt=""
+                 asp-append-version="true">
+            <br />
+            <div>
+                <button class="btn btn-danger" onclick="DeleteConfirmaton(@Model.EmoloyeeId)">Delete</button>
+                <br />
+            </div>
+            <div class="form-group">
+                <div class="custom-file">
+                    <label asp-for="Photo">Chose file..</label>
+                    <input asp-for="Photo" class="form-control ">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+</div>
+<script>
+    function DeleteConfirmaton(id) {
+        let text;
+        if (confirm("Are You sure to delete!") == true) {
+            location.replace("https://localhost:44361/Home/DeletePhoto/" + id)
+        }
+    }
+</script>

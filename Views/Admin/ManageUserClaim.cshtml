@@ -1,0 +1,28 @@
+﻿@model UserClaimViewModel;
+
+@{
+    var userId = ViewBag.userId;
+}
+
+<form method="post">
+    <div class="card">
+        <h2>Add Or Delete user from this role</h2>
+    </div>
+    <div class="card-body">
+        @{
+            for (int i = 0; i < Model.Claim.Count; i++)
+            {
+                <div class="form-check m-1">
+                    <input asp-for="@Model.Claim[i].IsSelected"  class="form-check-input" />
+                    <input asp-for="@Model.Claim[i].IsSelected" hidden />
+                    <input asp-for="@Model.Claim[i].ClaimType" hidden/>
+                    <label asp-for="@Model.Claim[i].IsSelected">@Model.Claim[i].ClaimType</label>
+                </div>
+            }
+        }
+    </div>
+    <div class="card-footer">
+        <input type="submit" value="Update" class="btn btn-primary" />
+        <a asp-action="Edit" asp-route-id="@userId" class="btn btn-primary">Cancel</a>
+    </div>
+</form>

@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Employee>
+@{
+    ViewBag.PageTitle = "Employee Details";
+}
+
+
+<div class="row justify-content-center m-3">
+    <div class="">
+        <table class="table table-dark ">
+            <thead>
+                <tr>
+                    <th scope="col">Employee Id</th>
+                    <th scope="col">Employee Name</th>
+                    <th scope="col">Department</th>
+                    <th scope="col">Salary</th>
+                    <th scope="col" class="justify-content-center">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    foreach (var employee in Model)
+                    {
+                        <tr>
+                            <th scope="row">@employee.EmployeeId</th>
+                            <td>@employee.EmployeeName</td>
+                            <td>@employee.Department</td>
+                            <td>@employee.Salary</td>
+                            <td>
+                                <a class="btn btn-warning" asp-controller="Home" asp-action="Details" asp-route-Id="@employee.EmployeeId">View</a>
+                                <a href="@Url.ActionLink("Update","Home",new { id = employee.EmployeeId})" class="btn btn-primary">Update</a>
+                                <button class="btn btn-danger"  onclick="confirmationDelete(@employee.EmployeeId);">Delete</button>
+
+                        </tr>
+
+                    }
+                }
+
+            </tbody>
+        </table>
+
+    </div>
+</div>
+<script>
+    function confirmationDelete(id) {
+        let text;
+        if (confirm("Are You sure to delete!") == true) {
+            location.replace("https://localhost:44361/Home/Delete/" + id)
+        }
+    }
+</script>

@@ -1,0 +1,43 @@
+﻿@model CreateEmployeeViewModel;
+
+@{ 
+    ViewBag.PageTitle = "Create";
+}
+
+<div class="row justify-content-center m-3">
+    <div class="col-sm-2">
+        <form enctype="multipart/form-data" asp-action="Create" asp-controller="Home" method="post">
+            <div class="form-group">
+                <label asp-for="EmployeeName">Name</label>
+                <input asp-for="EmployeeName" class="form-control" placeholder="Enter Name">
+                <span asp-validation-for="EmployeeName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="email">Email</label>
+                <input asp-for="email" class="form-control" placeholder="Email">
+                <span asp-validation-for="email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Salary">Salary</label>
+                <input asp-for="Salary" class="form-control" placeholder="Salary">
+                <span asp-validation-for="Salary" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Department">Select Department</label>
+                <select class="form-control form-control-lg" asp-for="Department"
+                        asp-items="Html.GetEnumSelectList<Dept>()">
+                    <option value="">please select</option>
+                </select>
+         
+                <span class="text-danger" asp-validation-for="Department"></span>
+            </div>
+            <div class="form-group">
+                <div class="custom-file">
+                    <label asp-for="Photo">Chose file..</label>
+                    <input multiple asp-for="Photo" class="form-control ">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>

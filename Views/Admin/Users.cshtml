@@ -1,0 +1,46 @@
+﻿@model IEnumerable<ApplicationUser>;
+
+@{
+    ViewBag.PageTitle = "Users";
+}
+
+<div class="row justify-content-center m-3">
+    <div class="">
+        <div>
+            <h2>Users Manage</h2>
+            <a class="btn btn-primary" asp-action="CreateUser" asp-controller="Admin">Create User</a>
+            <br />
+            <br />
+        </div>
+        <table class="table table-dark ">
+            <thead>
+                <tr>
+                    <th scope="col">Username</th>
+                    <th scope="col">User Id</th>
+                    <th scope="col">View</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    foreach (var user in Model)
+                    {
+                        <tr>
+                            <th scope="row">@user.Email</th>
+                            <td>@user.Id</td>
+                            <td>
+                                <form asp-action="DeleteUsers" asp-controller="Admin" asp-route-id="@user.Id" method="post">
+                                    <a asp-action="UpdateUser" asp-controller="Admin" asp-route-id="@user.Id" class="btn btn-primary">Edit User</a>
+                                    <button class="btn btn-danger" onclick="return confirm('Are you sure to delete @user.Email')">
+                                    Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+
+                    }
+                }
+
+            </tbody>
+        </table>
+
+    </div>
+</div>
